@@ -13,11 +13,6 @@ int refl(int index,int size){
 	if(index<half) return size-1-index;
 	else return half-(index-half)-(!(size%2));
 }
-/**
- * 		1. Removed unessesary set initialization - used containers instead
- * 		2. Removed extra overhead from sstream
- * 		3. from nlog(n) to plain n with a constant initialization;
- */ 
 void solve(){
 	int size;
 	string s;
