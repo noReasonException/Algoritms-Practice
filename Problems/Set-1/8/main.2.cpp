@@ -35,7 +35,7 @@ void solve(){
 	}
 	cout<<"Elements with max occurences ...\n";
 	for(int i=0;i<1000;i++){
-		if(lookup_table[i]==maxOcc)cout<<i;
+		if(lookup_table[i]==maxOcc)cout<<i<<"\n";
 	}
 	cout<<"\n";
 	cout<<"Times x"<<maxOcc;

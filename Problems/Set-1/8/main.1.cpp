@@ -8,6 +8,7 @@ using namespace std;
  *
  *	Assumptions
  * 		1. It might be a tie between occurences of numbers, in that case we need every number	
+ *		2.
  */ 
 
 
@@ -50,7 +51,7 @@ void solve(){
 	}
 	cout<<"Elements with max occurences ...\n";
 	for(auto &i:s){
-		if(i.second==maxOcc) cout<<i.first;
+		if(i.second==maxOcc) cout<<i.first<<"\n";
 	}
 	cout<<"\n";
 	cout<<"Times x"<<maxOcc;
