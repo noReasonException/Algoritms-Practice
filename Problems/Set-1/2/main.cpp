@@ -12,38 +12,33 @@ int refl(int index,int size){
 	if(index<half) return size-1-index;
 	else return half-(index-half)-(!(size%2));
 }
-
+/**
+ * 		1. Removed unessesary set initialization - used containers instead
+ * 		2. Removed extra overhead from sstream
+ * 		3. query on set only and not on vector : from n^2 to nlog(n)
+ */ 
 void solve(){
 	int size;
 	string s;
 	cin>>size;
 	cin>>s;
 
-	set<char> r_temp;
-	
-	stringstream result;
-	int curr_index,refl_index;
+	set<char> rset(s.begin(),s.end());
+	vector<char>r(rset.begin(),rset.end());
 
-	//populate set
-	for(int i=0;i<size;i++){
-		r_temp.insert(s[i]);
-	}
-	vector<char> r (r_temp.begin(),r_temp.end());
+	int curr_index,refl_index;
 	for(int i=0;i<size;i++){
 		//the index of this character into r
-		curr_index = find(r.begin(),r.end(),s[i]) - r.begin();
-		refl_index = refl(curr_index,r.size());
-		result<<r[refl_index];
-		//result<<
+		curr_index = distance(rset.begin(),rset.find(s[i]));
+		refl_index = refl(curr_index,rset.size());
+		cout<<r[refl_index];
 	}
-	cout<<result.str()<<endl;
-
-
+	cout<<"\n";
 }
 
 int main(){
 	int size;
 	cin>>size;
 	while(size--) solve();
-	cout<<endl;
+	cout<<"\n";
 }
