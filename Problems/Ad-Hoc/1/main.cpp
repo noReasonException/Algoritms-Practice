@@ -22,11 +22,14 @@ int solve(){
 	while(numbers--){
 		cin>>current;
 		if(current>max)max=current;
-		if(max==currentSum) indexes+=1;
-		currentSum+=current;
+		if(max==currentSum || max==currentSum+current) {
+			indexes+=1;
+			debug con "\t\t\t\tindex is now" con indexes con "\n";
+		}
 		debug con "number\t" con current con "\n";
 		debug con "\tmax\t" con max con "\n";
-		debug con "\tsum\t" con currentSum con "\n";
+		debug con "\tcurrent sum\t" con currentSum con "\n";
+		currentSum+=current;
 
 	}
 	return indexes;
