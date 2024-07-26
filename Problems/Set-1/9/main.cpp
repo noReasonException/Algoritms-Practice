@@ -14,25 +14,26 @@ using namespace std;
 #endif
 
 
+bool nonR(char i){
+	return i=='B' || i=='G';
+}
 void solve(){
+	bool result = true;
 	int n;
 	cin >>n;
 	string first,second;
 	cin>>first;
 	cin>>second;
-	regex replaceFirstPass("G");
-	regex replaceSecondPass("B");
-	string commonRepr = "0";
-	string firstTranslatedPass1 = regex_replace(first, replaceFirstPass, commonRepr);
-	string firstTranslated = regex_replace(firstTranslatedPass1,replaceSecondPass,commonRepr);
-	string secondTranslatedPass1 = regex_replace(second, replaceFirstPass, commonRepr);
-	string secondTranslated = regex_replace(secondTranslatedPass1,replaceSecondPass,commonRepr);
-	if(!firstTranslated.compare(secondTranslated)) {
-		cout<<"YES"; 
+	for(int i=0;i<first.size();i++){
+		if(nonR(first[i])&&nonR(second[i])) continue;
+		else if(first[i]=='R' && first[i]==second[i]) continue;
+		else{
+			result=false;
+			break;
+		}
 	}
-	else {
-		cout<<"NO";
-	}
+	if(result) cout<<"YES";
+	else cout<<"NO";
 
 }
 
