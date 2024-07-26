@@ -21,6 +21,6 @@ void solve(){
 int main(){
 	int n;
 	cin>>n;
-	while(n--)cout<<solve()<<"\n";
+	while(n--)solve();
 	return 0;
 }
