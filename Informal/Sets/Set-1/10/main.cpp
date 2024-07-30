@@ -14,9 +14,15 @@ using namespace std;
 /**
  *	1. Maximum : Everyone in a single team, everyone else in isolation
  * 		1.1 Isolated teams do not form friendships
- *  2. Minimum : Everyone in pairs of two, and one team with the leftovers
- * 		2.1 Pair-team = 1 friendship
- * 		2.2 leftovers choose 2 for the last team
+ * 	3[D]. Minimum: Everyone evenly spaced to all of the teams plus the last team with leftovers
+ * 		3.1 n/m is the number of players per team
+ * 		3.2 m are the teams
+ * 		3.3 last team with leftovers
+ * 			
+ * 				Every team : (m-1) * choose2(floor(n/(m-1))) 
+ * 				Last team, remaining players choose 2
+ * 							(n - (m-1)*floor(n/(m-1)))
+ * 				
 */
 
 
@@ -31,11 +37,13 @@ int main(){
 	int l=0;
 	cin>>n>>m;
 	
-
-
 	//min - max
-	cout<<(m-1) + choose2(n-(m-1)*2)<<" "<<choose2(n-m+1)<<"\n";
-	
+
+
+
+
+
+	cout<<(m-1) * choose2(floor(n/m)) + choose2(n-(m-1)*floor(n/m))<<" "<<choose2(n-m+1);
 
 	return 0;
 }
