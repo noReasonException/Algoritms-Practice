@@ -14,15 +14,12 @@ using namespace std;
 /**
  *	1. Maximum : Everyone in a single team, everyone else in isolation
  * 		1.1 Isolated teams do not form friendships
- * 	3[D]. Minimum: Everyone evenly spaced to all of the teams plus the last team with leftovers
- * 		3.1 n/m is the number of players per team
- * 		3.2 m are the teams
- * 		3.3 last team with leftovers
- * 			
- * 				Every team : (m-1) * choose2(floor(n/(m-1))) 
- * 				Last team, remaining players choose 2
- * 							(n - (m-1)*floor(n/(m-1)))
- * 				
+ * 	3[D]. Minimum: Everyone evenly spaced to all of the teams, leftovers also spaced to as many teams as possible
+ * 		3.1 for every new person in a team, the friendships are increased by the size of that team!
+ * 		3.2 therefore, we spread people as much as possible
+ * 		3.3 m teams, in case n%m==0, people fit in teams exacly
+ * 		3.4 if n%m!=0, we fit people evenly in n teams, and we add the friendships added if we add the leftovers in every team one by one
+ *				
 */
 
 
@@ -37,13 +34,8 @@ int main(){
 	int l=0;
 	cin>>n>>m;
 	
-	//min - max
 
-
-
-
-
-	cout<<(m-1) * choose2(floor(n/m)) + choose2(n-(m-1)*floor(n/m))<<" "<<choose2(n-m+1);
+	cout<<m*choose2(n/m) + (n%m)*(n/m)<<" "<<choose2(n-m+1);
 
 	return 0;
 }
