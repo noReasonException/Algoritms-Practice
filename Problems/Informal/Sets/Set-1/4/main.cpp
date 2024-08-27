@@ -33,20 +33,19 @@ template <typename container> void cinfoCon(container& genericSequence,string id
 
 
 /**
- *	Why?
+ *	proof on proof.pdf
 */
 void solve(){
-	vector<int> in;
-	in.push_back(10);
-	in.push_back(20);
-	cinfoCon(in,"123",1);
-	in.push_back(20);
-	cinfoCon(in,"456",2);
+	int n;
+	cin>>n;
+	if(n%2==0) cout << 1 <<" "<< n/2;
+	else cout<<-1;
+	cout<<"\n";
 }
 
 int main(){
-	int n;
-	cin>>n;
-	while(n--)solve();
+	int t;
+	cin>>t;
+	while(t--)solve();
 	return 0;
 }
