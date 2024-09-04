@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
 //forward refs
@@ -30,46 +31,29 @@ template <typename container> void cinfoCon(container& genericSequence,string id
 
 #endif
 
-
-
-/**
- *	Biggest -> Smallest
- * 	if break, should rest become biggest every time
- * 	if not -> No
-*/
 void solve(){
-	int n;
+	
+	unsigned int n;
 	cin >> n;
-	vector<int> inp(n);
-	bool increasing=true;
-	int monotonicSwitch = 0;
-	string result="No";
-	if(n==2){
-		cout<<"Yes";
-		return;
+
+	vector<unsigned long long> input(n);
+	for(int i=0;i<n;i++) cin>>input[i];
+
+	int monotonicity=0;
+	for(int i=0;i<n && monotonicity<2;i++) {
+		if(i>0 && input[i-1]>input[i]) monotonicity+=1;
 	}
+		
 
-	for(int i=0;i<n;i++) {
-		cin>>inp[i];
-		if(i){
-
-			if(increasing&&inp[i-1]<inp[i]) {
-				monotonicSwitch+=1;
-				increasing=false;
-			}
-			else if((!increasing)&&inp[i-1]>inp[1]){
-				monotonicSwitch+=1;
-				increasing=true;
-			}
-		}
-
-	}
-	cout<<((monotonicSwitch<=2)?"Yes":"No");
-
+	if(monotonicity==0) cout<<"Yes";
+	else if(monotonicity==1 && input[n-1]<=input[0]) cout<<"Yes";
+	else cout<<"No";
 }
 
 int main(){
-	int t;
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+	unsigned int t;
 	cin>>t;
 	while(t--){
 		solve();
