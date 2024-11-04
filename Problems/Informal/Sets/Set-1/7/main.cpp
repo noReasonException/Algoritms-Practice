@@ -5,6 +5,7 @@
 #define ll long long
 #define ull unsigned long long
 #define ui unsigned int
+#define b char
 
 
 using namespace std;
@@ -36,62 +37,53 @@ template <typename container> void cinfoCon(container& genericSequence,string id
 	}
 
 #endif
-
-
-	//12
-	//12*100 = 1200
-	//12*100 + 12 = 1212
-	//
-	//same on 26 base system, 26 lower case chars in ascii
-	//
-	//let original: 'abaa'
-	//		2 solutions, aaaa(1) and abab(2), min is 1
-	//Analysis of the original
-	//		abaa = 1211 = 1*26^0 + 2*26^1 + 1*26^2 + 1*26^3
-	//let call lookAhead('ab',4) 
-	//		ab = 12 = 1*26^0 + 2*26^1 = 53
-	//		totalSize is 4
-	//		therefore, 'ab' needs to be repeated k times , where k = floor(prefix.size()/totalSize)
-	//		k = 2
-	//		
-	// 		53
-
-
-ull decode(string message){
-	ull result=0;
-	cinfo add "decoding message: " add message add "\n";
-	for(int i=0;i<message.size();i++){
-		cinfo add "\t character " add message[i] add " with value " add (message[i]-97+1)*(pow(26,i)) add "\n";
-		result+=(message[i]-97+1)*(pow(26,i)); //'a' is 97 in char
+/***
+ * The idea is simple and inefficient
+ * 		if a candidate can fit 'exacly'
+ * 			we split the string to segments of size k
+ * 				every character of each segment should match  
+ * 																		Seg-1    Seg-2 
+ * 																	stormflame stornflame
+ * 																	|		   |
+ * 				has always offset = k.size()--->					------------
+ * * 																stormflame stornflame
+ * 																	 |		    |
+ * 																	 ------------
+ * 																		....
+ * 																		....
+ * * 																stormflame stornflame
+ * 																	         |		    |
+ * 																	          ------------
+ */ 
+bool isOk(ui k_size,string &s){
+	ui confict = false;
+	ui s_size = s.size();
+	for(ui segment=1;segment<(s_size/k_size);segment+=1){
+		for(ui each_char=0;each_char<k_size;each_char+=1){
+			if(s[each_char] != s[(segment*k_size)+each_char]){
+				if(!confict) confict=true;
+				else return false;
+			}
+		}
 	}
-	return result;
+	return true;
 }
-
-//look-ahead-operation
-ull decodeAhead(string message, int times){
-	//given a message 'ab' and a number n, decodes the message produced
-	//by concatenating 'ab' n times
-	string messageToDecode(times,'a');
-	return decode(messageToDecode);
-}
-
-
-
+//A given candidate string k can only have a chance of being the minimum valid k if s.size() % k.size() == 0 (i.e 'fits exacly')
 void solve(){
 	ui n;
-	char temp;
-	cin >>n;
-	vector<char> input(n);
-	stringstream buffer;
-	for(int i=0;i<n;i++) {
-		cin>>temp;
-		input[i] = temp;
-		buffer<< temp;
+	string s;
+	cin >> n;
+	cin >> s;
+	for(ui i=1;i<=n;i++){
+		//does the current fit?
+		if(!(n%(i))){ //yeap
+			if(isOk(i,s)){
+				cout<<i;
+				return;
+			}
+		}
 	}
-
-	cout<<decode(buffer.str());
-
-
+	cout<<s.size();
 }
 
 int main(){
