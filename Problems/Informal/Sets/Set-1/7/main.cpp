@@ -97,7 +97,7 @@ void solve(){
 	for(ui i=1;i<n;i++){
 		//does the current fit?
 		if(!(n%(i))){ //yeap
-			if(isOk2(i,s,n)){
+			if(isOk(i,s,n)){
 				cout<<i;
 				return;
 			}
