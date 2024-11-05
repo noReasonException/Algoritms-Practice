@@ -38,18 +38,52 @@ template <typename container> void cinfoCon(container& genericSequence,string id
 	}
 
 #endif
-/***
- */ 
 bool isOk(ui k_size,string &s,ui n){
-	ui confict = 0;
+	ui totalChanges=0;
+	b localChar1='\0';
+	b localChar2='\0';
+	ui localChar1Hits = 0;
+	ui localChar2Hits = 0;
+	b currentChar='\0';
 	for(ui each_char=0;each_char<k_size;each_char++){
-		for(ui each_segment=1;each_segment<(n/k_size);each_segment+=2){
-			if(s[((each_segment-1)*k_size)+each_char] != s[(each_segment*k_size)+each_char]){
-				confict+=1;
+		localChar1='\0';
+		localChar2='\0';
+		localChar1Hits = 0;
+		localChar2Hits = 0;
+		currentChar = '\0';
+		for(ui each_segment=0;each_segment<(n/k_size);each_segment++){
+			currentChar = s[(each_segment*k_size)+each_char];
+			if(localChar1=='\0' && localChar2=='\0'){
+				//no changes, set first variable here
+				localChar1=currentChar;
+				localChar1Hits++;
+				
+			}
+			else if(localChar1==currentChar){
+				localChar1Hits++;
+			}
+			else if(localChar1!='\0' && localChar1 != currentChar && localChar2=='\0'){
+				//second character detected, if that happens once, we are good
+				localChar2 = currentChar;
+				localChar2Hits++;
+
+			}
+			else if(localChar1!=currentChar && localChar2==currentChar){
+				localChar2Hits++;
+			}
+			else if (localChar1!='\0' && localChar2!='\0' && (localChar1!=currentChar && localChar2!=currentChar)){
+				//conflict, shortcut, k_size is not possible
+				return false;
 			}
 		}
+		if(localChar1Hits>1 && localChar2Hits>1){
+			//conflict, shortcut, k_size is not possible
+			return false;
+
+		}
+		totalChanges+=min(localChar1Hits,localChar2Hits);
 	}
-	return confict<2;
+	return totalChanges<2;
 }
 //A given candidate string k can only have a chance of being the minimum valid k if s.size() % k.size() == 0 (i.e 'fits exacly')
 void solve(){
@@ -57,10 +91,13 @@ void solve(){
 	string s;
 	cin >> n;
 	cin >> s;
-	for(ui i=1;i<=n;i++){
+	//see proof.pdf
+	//complexity is n * k_size * (n/k_size) = n^2
+	//solve is 0(n) and isOk2() is O(n) each call;
+	for(ui i=1;i<n;i++){
 		//does the current fit?
 		if(!(n%(i))){ //yeap
-			if(isOk(i,s,n)){
+			if(isOk2(i,s,n)){
 				cout<<i;
 				return;
 			}
