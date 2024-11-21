@@ -30,8 +30,6 @@ template <typename container> void cinfoCon(container& genericSequence,string id
 
 #endif
 
-
-
 /**
  	*
 	? Stuff to look for ->
@@ -41,7 +39,8 @@ template <typename container> void cinfoCon(container& genericSequence,string id
     * do something instead of nothing
     * timebox your approach
     * simple is better than complex
-    * n % mod = (n % mod + mod) % mod; (Handling negatives)
+    * n % mod = (n % mod + mod) % mod;
+    * long long instead of int
     
 */
 void solve(){
