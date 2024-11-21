@@ -30,21 +30,29 @@ template <typename container> void cinfoCon(container& genericSequence,string id
 
 #endif
 
-
-
 /**
- *	Why?
+ 	*
+	? Stuff to look for ->
+    * stay organised
+    * int overflows, array bounds, etc.
+    * special cases (n=1)?
+    * do something instead of nothing
+    * timebox your approach
+    * simple is better than complex
+    * n % mod = (n % mod + mod) % mod;
+    * long long instead of int
+    
 */
 void solve(){
-	vector<int> in;
-	in.push_back(10);
-	in.push_back(20);
-	cinfoCon(in,"123",1);
-	in.push_back(20);
-	cinfoCon(in,"456",2);
+	return;
 }
 
 int main(){
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+	//freopen("input.txt", "r", stdin);
+	//freopen("output.txt", "w", stdout);
+
 	int n;
 	cin>>n;
 	while(n--)solve();
